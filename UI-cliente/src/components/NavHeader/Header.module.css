@@ -1,0 +1,38 @@
+.navHeader {
+  background-color: #FFF;
+  width: 100vw;
+  height: 7vh;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  padding: 0.5em 0;
+  text-transform: uppercase;
+  border-bottom: 0.2vw solid #9c87e0;
+}
+
+.items {
+  font-size: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  text-align: center;
+  gap: 5em;
+}
+
+.items a {
+  text-decoration: none;
+  color: #000;
+  transition: all 0.5s;
+}
+
+.items a:hover {
+  color: #9c87e0;
+  text-decoration: underline;
+}
+
+.title{
+  font-size: 2rem;
+  font-weight: 100;
+}

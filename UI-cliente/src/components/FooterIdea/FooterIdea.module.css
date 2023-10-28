@@ -1,0 +1,38 @@
+.footer{
+    width: 100vw;
+    padding: 2% 0;
+    text-align: center;
+    color: #000;
+}
+
+.footer h3{
+    letter-spacing: 0.2rem;
+    font-weight: 500;
+}
+
+.footer button{
+    background-color:  #9C87E0;
+    width: 20%;
+    border-color: transparent;
+    border-radius: 10em;
+    padding: 0.5% 0;
+    cursor: pointer;
+    transition: all 1s;
+    font-size: 1rem;
+}
+
+.footer button:hover{
+    animation: 3s pulsation infinite;
+}
+
+@keyframes pulsation {
+    0%{
+        scale: 1.1;
+    }
+    50%{
+        scale: 1;
+    }
+    100%{
+        scale: 1.1;
+    }
+}
