@@ -1,16 +1,14 @@
 import React from "react";
 import styles from "./Header.module.css";
-function Header() {
+function Header({ texts, setActual }) {
   return (
     <nav className={styles.navHeader}>
       <div className={styles.items}>
-        <a href="">Servicio a clientes</a>
-        <a href="">Catalogo</a>
-        <a href="#" className={styles.title}>
-          Shinycrochet
-        </a>
-        <a href="">Calendario</a>
-        <a href="">INFORMACION DE ENTREGA</a>
+      {texts.map(({ text }, id) => (
+          <a key={id} onClick={() => setActual(id)} className={text === "Shinycrochet" ? styles.title : ""}>
+            {text}
+          </a>
+        ))}
       </div>
     </nav>
   );

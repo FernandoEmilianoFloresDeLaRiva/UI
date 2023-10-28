@@ -1,0 +1,18 @@
+.article{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    text-transform: capitalize;
+}
+
+.article figure{
+    width: 100%;
+    text-align: center;
+    border-bottom: 0.2vw solid #9c87e0;
+}
+
+.article figure img{
+    width: 90%;
+}
