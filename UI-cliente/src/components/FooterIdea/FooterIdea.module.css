@@ -28,11 +28,14 @@
 @keyframes pulsation {
     0%{
         scale: 1.1;
+        box-shadow: 0px 0px 5px 1px #87a9e0;
     }
     50%{
         scale: 1;
+        box-shadow: 0px 0px 10px 3px #87a9e0;
     }
     100%{
         scale: 1.1;
+        box-shadow: 0px 0px 5px 1px #87a9e0;
     }
 }

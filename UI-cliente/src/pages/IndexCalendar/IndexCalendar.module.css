@@ -8,7 +8,7 @@
     color: #000;
 }
 
-.main{
+.app mmain{
     margin-top: 9vh;
     width: 80vw;
     display: flex;
@@ -16,17 +16,4 @@
     justify-content: center;
     align-items: center;
     gap: 3em;
-}
-
-.main h1{
-    font-weight: 100;
-}
-
-.flower{
-    width: 20%;
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    opacity: 0.5;
-    z-index: 0;
 }

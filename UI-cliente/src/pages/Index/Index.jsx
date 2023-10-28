@@ -3,6 +3,7 @@ import styles from "./Index.module.css";
 import Header from "../../components/NavHeader/Header";
 import IndexCatalogo from "../IndexCatalogo/IndexCatalogo";
 import Home from "../Home/Home";
+import IndexCalendar from "../IndexCalendar/IndexCalendar";
 function Index() {
   const [actualComponent, setActualComponent] = useState(2);
   const navTexts = [
@@ -20,7 +21,7 @@ function Index() {
     },
     {
       text: "Calendario",
-      component: null,
+      component: <IndexCalendar/>,
     },
     {
       text: "INFORMACION DE ENTREGA",
