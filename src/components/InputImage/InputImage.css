@@ -1,0 +1,65 @@
+.containerInputImage{
+    background-color: white;
+    height: 20vmax;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1em;
+    min-width: 200px;
+    min-height: 150px;
+}
+
+.containerInputImage label{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5em;
+    padding: 1em;
+    border-radius: 0.3em;
+    color: #9C87E0;
+    border: .2em dashed #9C87E0;
+}
+
+.containerInputImage label img{
+    width: 1em;
+}
+
+.containerInputImage label:hover{
+    scale: 1.05;
+    background-color: #d4c6ff;
+}
+
+#image {
+    display: none;
+}
+
+.imagePreview{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 1em;
+    
+}
+
+.backArrow img , .nextArrow img{
+    width: 1em;
+}
+
+.backArrow, .nextArrow{
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.3);
+    width: 3em;
+    height: 5em;
+    color: white;
+    display: block;
+}
+
+.nextArrow{
+    right: 0;
+    border-radius: 1em 0 0 1em;
+}
+
+.backArrow{
+    left: 0;
+    border-radius: 0 1em 1em 0;
+}
