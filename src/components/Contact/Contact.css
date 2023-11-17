@@ -1,0 +1,19 @@
+.containerContact{
+    display: flex;
+    gap: 3vmax;
+}
+
+.containerContact a{
+    font-size: 1.5em;
+    width: 30vmax;
+    background-color: #9C87E0;
+    border-radius: 1vmax;
+    padding: .5em;
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.containerContact img {
+    width: 2em;
+}

@@ -1,0 +1,34 @@
+
+  .selectedColors{
+    display: flex;
+    align-items: center;
+    
+  }
+
+
+  .containerColors, .selectedColors{
+    display: flex;
+    gap: .2em;
+    width: 15em;
+    flex-wrap: wrap;
+    margin: .5em auto;
+    justify-content: center;
+  }
+
+  .inputColor{
+    box-sizing: border-box;
+    appearance: none;
+    border: .1em solid white;
+    width: 1.5em;
+    height: 1.5em;
+  }
+  
+  .inputColor:hover {
+    scale: 1.2;
+  }
+
+  .inputColor:disabled{
+    opacity: 0.5;
+  }
+
+  

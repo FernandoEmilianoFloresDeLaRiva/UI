@@ -1,0 +1,47 @@
+.containerClientService{
+    margin: 5vmax 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4vmax;
+}
+
+.containerClientService h2{
+    font-size: 2em;
+}
+
+.containerContacts{
+    display: flex;
+    flex-direction: column;
+    gap: 2vmax;
+}
+
+.containerMessage{
+    display: flex;
+    flex-direction: column;
+    gap: 1vmax;
+    width: 25vmax;
+    border: .2em solid #9C87E0;
+    padding: 1em;
+    border-radius: 1vmax;
+}
+
+.containerMessage p {
+    font-size: 1.2em;
+}
+
+.containerMessage hr{
+    border: .1em solid #9C87E0;
+}
+
+.containerMessage h3{
+    font-size: 1.5em;
+    color: #9C87E0
+}
+
+.containerClientService > div{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2vmax;
+    justify-content: space-evenly;
+    align-items: center;
+}
