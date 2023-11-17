@@ -39,6 +39,10 @@
 }
 */
 .navHeader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10vh;
     width: 100%;
     padding: 0.5em 0;
     box-shadow: 0 0 .4em #9C87E0;
