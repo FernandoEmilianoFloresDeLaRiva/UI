@@ -1,15 +1,18 @@
 :root {
+  margin: 0;
+  padding: 0;
   font-family: "Gilda Display";
-  line-height: 1.5;
-  font-weight: 400;
   overflow-x: hidden;
-  color-scheme: light dark;
   color: black;
-  background-color: #FFF;
-
+  background-color: #fff;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+}
+
+* {
+  margin: 0;
+  padding: 0;
 }

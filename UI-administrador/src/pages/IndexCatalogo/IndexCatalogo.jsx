@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./Index.module.css";
-import flower from '../../assets/flower.svg'
+import flower from "../../assets/flower.svg";
 import ContainerCatalogo from "../../components/ContainerCatalogo/ContainerCatalogo";
 
 function IndexCatalogo() {
@@ -49,7 +49,7 @@ function IndexCatalogo() {
           productos={productos.filter((producto) => producto.combo === true)}
           title={"Combos"}
         />
-        <img src={flower} className={styles.flower}/>
+        <img src={flower} className={styles.flower} />
       </main>
     </div>
   );

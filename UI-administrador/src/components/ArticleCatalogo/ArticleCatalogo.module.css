@@ -12,6 +12,7 @@
     width: 100%;
     text-align: center;
     border-bottom: 0.2vw solid #9c87e0;
+    padding-bottom: 2%;
 }
 
 .article figure img{
@@ -32,4 +33,13 @@
     justify-content: flex-end;
     align-items: center;
     gap: 2em;
+}
+
+.icons img{
+    transition: all 1s;
+}
+
+.icons img:hover{
+    cursor: pointer;
+    scale: 1.1;
 }

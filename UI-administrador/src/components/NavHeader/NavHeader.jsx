@@ -18,21 +18,15 @@ export default function NavHeader() {
     <nav className="navHeader">
       <ul>
         <li className="logo">
-          <Link to="/home" className="link">
-            <img src={logo} alt="" />
-            <h1>SHINYCROCHET</h1>
-          </Link>
+          <img src={logo} alt="" />
+          <h1>SHINYCROCHET</h1>
+
           <button onClick={showMenu} className="buttonMenu">
             <img src={bars} alt="" />
           </button>
         </li>
 
         <span ref={myRef}>
-          <li>
-            <Link to="/contacto" className="link">
-              CONTACTO
-            </Link>
-          </li>
           <li>
             <Link to="/catalogo" className="link">
               CATÁLOGO
