@@ -9,6 +9,7 @@
   background-size: 15vmax;
   position: fixed;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 input,
