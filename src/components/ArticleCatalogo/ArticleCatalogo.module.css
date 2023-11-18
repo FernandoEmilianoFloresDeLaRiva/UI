@@ -1,0 +1,22 @@
+.article{
+    color : #000;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    text-transform: capitalize;
+}
+
+.article figure{
+    width: 100%;
+    text-align: center;
+    padding-bottom: 2%;
+    margin-bottom: 2%;
+    border-bottom: 0.2vw solid #9c87e0;
+}
+
+.article figure img{
+    width: 90%;
+}

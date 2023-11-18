@@ -1,0 +1,20 @@
+.a {
+  width: 15%;
+  text-align: center;
+  transition: all 1s;
+  cursor: pointer;
+}
+
+.a img {
+  width: 100%;
+}
+
+.a:hover {
+  scale: 1.1;
+}
+
+@media (max-width: 576px) {
+  .a {
+    width: 30%;
+  }
+}
