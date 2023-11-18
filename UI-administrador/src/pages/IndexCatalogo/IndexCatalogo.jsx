@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./Index.module.css";
 import flower from "../../assets/flower.svg";
 import ContainerCatalogo from "../../components/ContainerCatalogo/ContainerCatalogo";
+import { Link } from "wouter";
 
 function IndexCatalogo() {
   const productos = [
@@ -40,7 +41,9 @@ function IndexCatalogo() {
     <div className={styles.app}>
       <main className={styles.main}>
         <h1>Catalogo</h1>
-        <i className={styles.plus}>+</i>
+        <Link to="/crearProducto">
+          <i className={styles.plus}>+</i>
+        </Link>
         <ContainerCatalogo
           productos={productos.filter((producto) => producto.combo === false)}
           title={"Haz tu ramito"}

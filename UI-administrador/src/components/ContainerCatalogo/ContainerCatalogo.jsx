@@ -8,19 +8,10 @@ function ContainerCatalogo({ productos, title }) {
       <h2>{title}</h2>
       <div className={styles.containerArticles}>
         {productos.map((producto) =>
-          producto.combo ? (
-            <ArticleCatalogo
-              nombreProducto={producto.nombre}
-              precioProducto={producto.precio}
-              combo={producto.combo}
-            />
-          ) : (
-            <ArticleCatalogo
-              nombreProducto={producto.nombre}
-              precioProducto={producto.precio}
-              combo={producto.combo}
-            />
-          )
+          <ArticleCatalogo
+          nombreProducto={producto.nombre}
+          precioProducto={producto.precio}
+        />
         )}
       </div>
     </div>

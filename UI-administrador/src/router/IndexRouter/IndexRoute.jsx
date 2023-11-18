@@ -7,18 +7,36 @@ import ProductInfo from "../../pages/ProductInfo/ProductInfo";
 import NavHeader from "../../components/NavHeader/NavHeader.jsx";
 import IndexCatalogo from "../../pages/IndexCatalogo/IndexCatalogo.jsx";
 import Bell from "../../components/BellNotification/Bell.jsx";
+import CreateProduct from "../../pages/CreateProduct/CreateProduct.jsx";
+import PrivateRoute from "../PrivateRoute.jsx";
 
 function IndexRoute() {
+  //Ejemplo de como funcionara con auth, despues se cambiara con lo de la api
+  const auth = false;
   return (
     <div className="App">
-      <NavHeader />
-      <Bell />
-      <Route component={Login} path="/" />
-      <Route component={IndexCatalogo} path="/catalogo" />
-      <Route component={Calendar} path="/calendario" />
-      <Route path="/pedidos">
-        <ProductInfo admin={true} />
-      </Route>
+      {auth && (
+        <>
+          <NavHeader />
+          <Bell />
+        </>
+      )}
+      <Route component={Login} path={"/"} />
+      <PrivateRoute pathName={"/catalogo"} auth={auth}>
+        <IndexCatalogo />
+      </PrivateRoute>
+      <PrivateRoute pathName={"/calendario"} auth={auth}>
+        <Calendar />
+      </PrivateRoute>
+      <PrivateRoute pathName={"/pedidos"} auth={auth}>
+        <ProductInfo />
+      </PrivateRoute>
+      <PrivateRoute pathName={"/crearProducto"} auth={auth}>
+        <CreateProduct />
+      </PrivateRoute>
+      <PrivateRoute pathName={"/modificar/:id"} auth={auth}>
+        <CreateProduct />
+      </PrivateRoute>
     </div>
   );
 }

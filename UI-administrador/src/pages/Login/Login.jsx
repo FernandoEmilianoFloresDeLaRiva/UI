@@ -13,7 +13,13 @@ export default function Login() {
       <img src={logo} />
       <input type="email" placeholder="Correo" required />
       <input type="password" placeholder="Contrasena" required />
-      {/* Agregar mas inputs para llenar los demas campos de la db */}
+      {register && (
+        <>
+          <input type="text" placeholder="Nombre" required />
+          <input type="text" placeholder="Apellido" required />
+          <input type="tel" placeholder="Num. telefonico" required />
+        </>
+      )}
       <span className="register" onClick={handleRegister}>
         {!register ? "Aun no te has registrado" : "Ya estas registrado?"}
       </span>
