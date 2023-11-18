@@ -16,7 +16,6 @@ function App() {
         deliveryPoint={"La Mision"}
         date={"31-01-01"}
       />
-      <ProductInfo admin={true} />
     </div>
   );
 }
