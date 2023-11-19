@@ -1,18 +1,12 @@
 import { apiPost } from "../../api/api";
 import { AUTH_BASE } from "../../../constants/auth_URL";
 
-export const postUsuario = async (data, token) => {
+export const postUsuario = async (data) => {
   try {
     const headers = {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
     };
-    const body = {
-      method: "POST",
-      headers,
-      body: JSON.stringify(data),
-    };
-    const res = await apiPost(`${AUTH_BASE}`, body);
+    const res = await apiPost(`${AUTH_BASE}`, data, headers);
     return res;
   } catch (err) {
     console.error("Error fetching: ", err);

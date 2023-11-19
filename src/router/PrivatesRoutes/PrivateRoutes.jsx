@@ -7,17 +7,20 @@ import OrderProduct from "../../pages/OrderProduct/OrderProduct.jsx";
 import ClientService from "../../pages/ClientService/ClientService";
 import Calendar from "../../pages/Calendar/Calendar";
 import ProductInfo from "../../pages/ProductInfo/ProductInfo";
-
 import NavHeader from "../../components/NavHeader/NavHeader.jsx";
-
 import Bell from "../../components/BellNotification/Bell.jsx";
+
 function PrivateRoutes() {
   const { objectAuth } = useContext(AuthContext);
   return (
     <>
-      <NavHeader />
-      <Bell />
-      <PrivateRoute pathName={"/home"} auth={objectAuth.isAuth}>
+      {objectAuth.isAuth && (
+        <>
+          <NavHeader />
+          <Bell />
+        </>
+      )}
+      <PrivateRoute pathName={"/"} auth={objectAuth.isAuth}>
         <Home />
       </PrivateRoute>
       <PrivateRoute pathName={"/catalogo"} auth={objectAuth.isAuth}>

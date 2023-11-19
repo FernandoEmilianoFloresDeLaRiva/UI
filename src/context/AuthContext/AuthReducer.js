@@ -8,27 +8,35 @@ export default async function AuthReducer(state, action) {
       const res = await getAuth(action.payload);
       if (res) {
         const { token, usuario } = res;
-        window.localStorage.setItem("token", token);
         const newState = await {
           isAuth: true,
           user: usuario,
           token,
         };
-        console.log(newState);
+        window.localStorage.setItem("userLog", JSON.stringify(newState));
+        window.location.reload();
         return newState;
       }
       console.error(`Error validando credenciales`);
       return state;
     }
     case authActions.postUser: {
-      try {
-        const res = await postUsuario(action.payload, state.token);
-        window.alert(`Usuario ${action.payload.nombre} creado exitosamente`);
-        return state;
-      } catch (err) {
-        window.alert("Error creando el usuario");
-        return state;
-      }
+      const objeto = {
+        ...action.payload,
+        tipo: 2,
+      };
+      const res = await postUsuario(objeto);
+      if (res) window.alert(res.message);
+      else window.alert("Error creando el usuario");
+      return state;
+    }
+    case authActions.logout: {
+      window.localStorage.removeItem("userLog");
+      return {
+        isAuth: false,
+        user: {},
+        token: null,
+      };
     }
   }
 }

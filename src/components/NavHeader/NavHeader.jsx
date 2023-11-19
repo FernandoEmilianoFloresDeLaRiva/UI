@@ -1,10 +1,13 @@
 import "./NavHeader.css";
 import { Link } from "wouter";
 import logo from "../../images/logo-blanco.jpg";
-import { useRef } from "react";
+import { useRef, useContext } from "react";
+import { AuthContext } from "../../context/AuthContext/AuthContext";
 import bars from "../../images/bars-solid.svg";
+import { authActions } from "../../context/AuthContext/AuthActions";
 
 export default function NavHeader() {
+  const { dispatch } = useContext(AuthContext);
   const myRef = useRef();
   const showMenu = () => {
     const display = myRef.current.style.display;
@@ -13,12 +16,15 @@ export default function NavHeader() {
       : (myRef.current.style.display = "inline-block");
     console.log(display);
   };
-
+  const handleLogout = (e) => {
+    e.preventDefault();
+    dispatch({ type: authActions.logout });
+  };
   return (
     <nav className="navHeader">
       <ul>
         <li className="logo">
-          <Link to="/home" className="link">
+          <Link to="/" className="link">
             <img src={logo} alt="" />
             <h1>SHINYCROCHET</h1>
           </Link>
@@ -47,6 +53,9 @@ export default function NavHeader() {
             <Link to="/pedidos" className="link">
               PEDIDOS
             </Link>
+          </li>
+          <li className="link" onClick={handleLogout}>
+            Cerrar Sesión
           </li>
         </span>
       </ul>

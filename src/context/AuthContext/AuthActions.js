@@ -1,4 +1,5 @@
 export const authActions = {
     getAuth : "getAuth",
-    postUser : "postUser"
+    postUser : "postUser",
+    logout : "logout",
 }

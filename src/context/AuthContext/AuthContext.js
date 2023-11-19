@@ -7,9 +7,12 @@ export default function ProviderAuth({ children }) {
   const initialState = {
     isAuth: false,
     user: {},
-    token: window.localStorage.getItem("token") || null,
+    token: null,
   };
-  const [objectAuth, dispatch] = useReducer(AuthReducer, initialState);
+  const objectState =
+    JSON.parse(window.localStorage.getItem("userLog")) || initialState;
+
+  const [objectAuth, dispatch] = useReducer(AuthReducer, objectState);
   return (
     <AuthContext.Provider value={{ objectAuth, dispatch }}>
       {children}
