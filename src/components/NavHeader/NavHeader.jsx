@@ -28,7 +28,7 @@ export default function NavHeader() {
 
         <span ref={myRef}>
           <li>
-            <Link to="/catalogo" className="link">
+            <Link to="/" className="link">
               CATÁLOGO
             </Link>
           </li>
