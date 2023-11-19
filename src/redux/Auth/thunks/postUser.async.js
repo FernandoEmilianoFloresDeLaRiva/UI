@@ -8,7 +8,7 @@ export const postUserAsync = createAsyncThunk(
     try {
       const objeto = {
         ...payload,
-        tipo: 2,
+        tipo: 1,
       };
       const res = await postUsuario(objeto);
       return res;

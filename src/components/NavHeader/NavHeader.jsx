@@ -3,15 +3,21 @@ import { Link } from "wouter";
 import logo from "../../images/logo-blanco.jpg";
 import { useRef } from "react";
 import bars from "../../images/bars-solid.svg";
+import { useDispatch } from "react-redux";
+import { logout } from "../../redux/Auth/auth.slice";
 
 export default function NavHeader() {
   const myRef = useRef();
+  const dispatch = useDispatch();
   const showMenu = () => {
     const display = myRef.current.style.display;
     display === "inline-block"
       ? (myRef.current.style.display = "none")
       : (myRef.current.style.display = "inline-block");
     console.log(display);
+  };
+  const handleLogOut = () => {
+    dispatch(logout());
   };
 
   return (
@@ -41,6 +47,9 @@ export default function NavHeader() {
             <Link to="/pedidos" className="link">
               PEDIDOS
             </Link>
+          </li>
+          <li className="link" onClick={handleLogOut}>
+            CERRAR SESIÓN
           </li>
         </span>
       </ul>
