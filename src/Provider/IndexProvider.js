@@ -1,12 +1,13 @@
 import React from "react";
 import IndexRoute from "../router/IndexRouter/IndexRoute";
-import ProviderAuth from "./AuthContext/AuthContext";
+import { store } from "../redux/indexStore";
+import { Provider } from "react-redux";
 
 function IndexProvider() {
   return (
-    <ProviderAuth>
+    <Provider store={store}>
       <IndexRoute />
-    </ProviderAuth>
+    </Provider>
   );
 }
 

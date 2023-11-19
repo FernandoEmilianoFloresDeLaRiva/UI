@@ -1,9 +1,10 @@
 import logo from "../../images/logo-blanco.jpg";
 import "./Login.css";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useForm } from "../../hooks/useForm";
-import { authActions } from "../../context/AuthContext/AuthActions";
-import { AuthContext } from "../../context/AuthContext/AuthContext";
+import { postUserAsync } from "../../redux/Auth/thunks/postUser.async";
+import { getAuthAsync } from "../../redux/Auth/thunks/getAuth.async";
+import { useDispatch } from "react-redux";
 
 export default function Login() {
   const [register, setRegistrer] = useState(false);
@@ -23,8 +24,7 @@ export default function Login() {
       };
   //custom hook
   const { object, handleObject } = useForm(initialState);
-  //dispatch de contexto
-  const { dispatch } = useContext(AuthContext);
+  const dispatch = useDispatch();
   const handleRegister = () => {
     setRegistrer((prev) => !prev);
   };
@@ -33,10 +33,10 @@ export default function Login() {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch({
-      type: register ? authActions.postUser : authActions.getAuth,
-      payload: object,
-    });
+    const ejecutarFuncion = register
+      ? postUserAsync(object)
+      : getAuthAsync(object);
+    dispatch(ejecutarFuncion);
   };
   return (
     <form className="login" onSubmit={handleSubmit}>

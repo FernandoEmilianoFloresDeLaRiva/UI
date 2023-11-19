@@ -1,13 +1,13 @@
 import "./NavHeader.css";
 import { Link } from "wouter";
 import logo from "../../images/logo-blanco.jpg";
-import { useRef, useContext } from "react";
-import { AuthContext } from "../../context/AuthContext/AuthContext";
+import { useRef } from "react";
 import bars from "../../images/bars-solid.svg";
-import { authActions } from "../../context/AuthContext/AuthActions";
+import { useDispatch } from "react-redux";
+import { logout } from "../../redux/Auth/auth.slice";
 
 export default function NavHeader() {
-  const { dispatch } = useContext(AuthContext);
+  const dispatch = useDispatch();
   const myRef = useRef();
   const showMenu = () => {
     const display = myRef.current.style.display;
@@ -18,7 +18,7 @@ export default function NavHeader() {
   };
   const handleLogout = (e) => {
     e.preventDefault();
-    dispatch({ type: authActions.logout });
+    dispatch(logout());
   };
   return (
     <nav className="navHeader">
