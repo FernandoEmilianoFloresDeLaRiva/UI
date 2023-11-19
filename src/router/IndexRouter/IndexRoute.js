@@ -25,7 +25,7 @@ function IndexRoute() {
       <Route component={Login} path="/" />
       <PrivateRoute pathName={"/home"} auth={auth}>
         <Home />
-      </PrivateRoute> 
+      </PrivateRoute>
       <PrivateRoute pathName={"/catalogo"} auth={auth}>
         <IndexCatalogo />
       </PrivateRoute>

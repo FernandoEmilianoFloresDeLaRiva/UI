@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import IndexRoute from './router/IndexRouter/IndexRoute.js';
+import IndexProvider from './redux/provider/IndexProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <IndexRoute />
+    <IndexProvider />
   </React.StrictMode>
 );
