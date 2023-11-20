@@ -1,11 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { setProductoReducer } from "./reducers/setProducto";
+import { setProductoReducerFullfiled, setProductoReducerRejected } from "./reducers/setProducto.reducer";
+import { setProductoAsync } from "./thunks/setProducto.async";
 
 export const productoSlice = createSlice({
   name: "producto",
   initialState: {},
-  reducers: {
-    setProducto: setProductoReducer,
+  extraReducers : builder => {
+    builder.addCase(setProductoAsync.fulfilled, setProductoReducerFullfiled)
+    builder.addCase(setProductoAsync.rejected, setProductoReducerRejected)
   }
 });
 

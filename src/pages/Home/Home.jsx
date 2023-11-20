@@ -1,16 +1,29 @@
 import React from "react";
 import styles from "./Home.module.css";
 import Description from "../../components/Description/Description";
-import SectionImg from "../../components/SectionImg/SectionImg";
-import Preview from "../../components/Preview/Preview";
+import { SectionImgLazy } from "../../components/SectionImg/SectionImg";
+import { PreviewLazy } from "../../components/Preview/Preview";
 import FooterIdea from "../../components/FooterIdea/FooterIdea";
+import { useProductos } from "../../hooks/useProductos";
+import { Suspense } from "react";
+
 function Home() {
+  const { isLoading, productos } = useProductos();
+
   return (
     <div className={styles.app}>
       <main>
-        <SectionImg />
+        {!isLoading && (
+          <Suspense fallback={"loading..."}>
+            <SectionImgLazy productos={productos} />
+          </Suspense>
+        )}
         <Description />
-        <Preview />
+        {!isLoading && (
+          <Suspense fallback={"loading..."}>
+            <PreviewLazy productos={productos} />
+          </Suspense>
+        )}
       </main>
       <FooterIdea />
     </div>

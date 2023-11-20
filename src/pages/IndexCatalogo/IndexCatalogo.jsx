@@ -1,49 +1,22 @@
 import React from "react";
 import styles from "./IndexCatalogo.module.css";
-import Container from "../../components/ContainerCatalogo/Container";
+import { ContainerLazy } from "../../components/ContainerCatalogo/Container";
+import { useProductos } from "../../hooks/useProductos";
+import { Suspense } from "react";
 
 function IndexCatalogo() {
-  const productos = [
-    {
-      nombre: "Tulipan",
-      precio: 60,
-    },
-    {
-      nombre: "Girasol grande",
-      precio: 80,
-
-    },
-    {
-      nombre: "Girasol pequeño",
-      precio: 40,
-
-    },
-    {
-      nombre: "Tulipanes",
-      precio: 350,
-
-    },
-    {
-      nombre: "Girasoles",
-      precio: 350,
-
-    },
-    {
-      nombre: "Girasoles",
-      precio: 350,
-
-    },
-  ];
-  
+  const { productos, isLoading } = useProductos();
   return (
     <div className={styles.app}>
       <main className={styles.main}>
         <h1>Catalogo</h1>
-        <Container
-          productos={productos}
-          title={"Haz tu ramito"}
-        />
-       
+        {isLoading ? (
+          <p>loading...</p>
+        ) : (
+          <Suspense fallback={"Cargando productos..."}>
+            <ContainerLazy productos={productos} title={"Haz tu ramito"} />
+          </Suspense>
+        )}
       </main>
     </div>
   );

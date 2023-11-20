@@ -10,6 +10,13 @@ export const apiGetWithAuth = async (endpoint, headers) => {
   return res.json();
 };
 
+export const apiGetImg = async (endpoint, headers) => {
+  const res = await fetch(endpoint, { headers });
+  if(res.status === 401) return 401
+  if (res.status !== 200) return null;
+  return res;
+}
+
 export const apiLogin = async (endpoint, data, headers) => {
   const body = {
     method: "POST",

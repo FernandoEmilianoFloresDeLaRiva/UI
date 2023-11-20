@@ -8,7 +8,7 @@ export const postEntregaReducerFullfiled = (state, action) => {
 };
 
 export const postEntregaReducerRejected = (state, action) => {
-  // window.location.href = "/";
+  window.location.href = "/";
   window.alert(
     "Se ha tenido un error realizando su pedido, intentelo mas tarde..."
   );

@@ -10,3 +10,4 @@ export const getColors = async () => {
     throw err;
   }
 };
+

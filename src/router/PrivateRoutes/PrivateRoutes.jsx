@@ -15,7 +15,7 @@ import { getColorsAsync } from "../../redux/Colors/Thunks/getColors.async.js";
 
 function PrivateRoutes() {
   const dispatch = useDispatch();
-  const objectAuth = useSelector((state) => state.auth);
+  const { isAuth, token } = useSelector((state) => state.auth);
   useEffect(() => {
     const socket = inicializarSocket();
     dispatch(getColorsAsync());
@@ -25,32 +25,32 @@ function PrivateRoutes() {
   }, []);
   return (
     <>
-      {objectAuth.isAuth && (
+      {isAuth && (
         <>
           <NavHeader />
           <Bell />
         </>
       )}
-      <PrivateRoute pathName={"/"} auth={objectAuth.isAuth}>
+      <PrivateRoute pathName={"/"} auth={isAuth}>
         <Home />
       </PrivateRoute>
-      <PrivateRoute pathName={"/catalogo"} auth={objectAuth.isAuth}>
+      <PrivateRoute pathName={"/catalogo"} auth={isAuth}>
         <IndexCatalogo />
       </PrivateRoute>
-      <PrivateRoute pathName={"/contacto"} auth={objectAuth.isAuth}>
+      <PrivateRoute pathName={"/contacto"} auth={isAuth}>
         <ClientService />
       </PrivateRoute>
-      <PrivateRoute pathName={"/calendario"} auth={objectAuth.isAuth}>
+      <PrivateRoute pathName={"/calendario"} auth={isAuth}>
         <Calendar />
       </PrivateRoute>
-      <PrivateRoute pathName={"/pedidos"} auth={objectAuth.isAuth}>
+      <PrivateRoute pathName={"/pedidos"} auth={isAuth}>
         <ProductInfo />
       </PrivateRoute>
-      <PrivateRoute pathName="/personalizado" auth={objectAuth.isAuth}>
+      <PrivateRoute pathName="/personalizado" auth={isAuth}>
         <Personalizado />
       </PrivateRoute>
-      <PrivateRoute pathName="/producto" auth={objectAuth.isAuth}>
-        <OrderProduct />
+      <PrivateRoute pathName="/producto" auth={isAuth}>
+        <OrderProduct token={token} />
       </PrivateRoute>
     </>
   );

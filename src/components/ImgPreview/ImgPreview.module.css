@@ -1,4 +1,4 @@
-.a {
+.a{
   width: 15%;
   text-align: center;
   transition: all 1s;
@@ -10,6 +10,7 @@
 }
 
 .a:hover {
+  cursor: pointer;
   scale: 1.1;
 }
 

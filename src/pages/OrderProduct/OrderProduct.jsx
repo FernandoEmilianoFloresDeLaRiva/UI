@@ -9,20 +9,13 @@ import ContainerImages from "../../components/ContainerImages/ContainerImages";
 import { postEntregaAsync } from "../../redux/Entregas/thunks/postEntrega.async";
 import { useDispatch, useSelector } from "react-redux";
 
-export default function OrderProduct() {
-  const { token } = useSelector((state) => state.auth);
+export default function OrderProduct({ token }) {
+  //se recupera producto del contexto
+  const producto = useSelector((state) => state.producto);
   const dispatch = useDispatch();
-  //recuperar producto del contexto
 
-  //Recuperar imagenes
-  // const productImages = [
-  //   "https://images4-a.ravelrycache.com/uploads/loopycathrine/607713742/F8A2A9DB-F8CF-441E-B65D-46108C308F1E_medium2.jpeg",
-  //   "https://i5.walmartimages.com/seo/Piusho-Action-Figure-7-5-GK-Muscle-Psyduck-Vinyl-Figure-Exquisite-Figurine-for-Collection-Home-Decoration-Perfect-Gift-for-Boys-Girls_006c6c76-3a2c-4fe1-b6ac-165ae0965670.1fa78d68c27fa8f4638c084333f85762.jpeg?odnHeight=768&odnWidth=768&odnBg=FFFFFF",
-  //   "https://ae01.alicdn.com/kf/S4ea4065dddfa4b469a3c5686c7dc9e67f/Figura-de-acci-n-de-Pok-mon-Pikachu-Psyduck-Squirtle-juguete-divertido-de-Anime-modelo-de.jpg",
-  // ];
-
-  //cambiar estado inicial por los colores del producto
   //Atributos de los objetos
+  //colores elegidos por usuario
   const [colores, setColores] = useState([]);
   const [products, setProducts] = useState(1);
   const [lugar, setLugar] = useState("");
@@ -46,26 +39,26 @@ export default function OrderProduct() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const colorsToSend = colores.map((color) => color.id_color);
     const data = {
       token,
-      //id del producto en el contexto
+      id_producto: producto.id_producto,
       data: {
         id_productoNew: "2218a179-9a10-4816-a878-291999c8b154",
         pedido: {
           //nombre del producto en contexto
-          nombre_pedido: "Tulipanes Rojos",
+          nombre_pedido: producto.nombre_producto,
           cantidad: products,
           especificacion: "",
           dedicatoria,
           status: true,
-          colores,
+          colores: colorsToSend,
         },
         entrega: {
           lugar,
           horario,
           fecha,
-          //total del producto en contexto
-          total: 0,
+          total: producto.precio * products,
         },
       },
     };
@@ -76,15 +69,24 @@ export default function OrderProduct() {
     <Card>
       <form className="deliveryForm" onSubmit={handleSubmit}>
         <div className="leftContainer">
-          <ContainerImages images={[]} />
+          <ContainerImages
+            token={token}
+            id={producto.id_producto}
+          />
 
           {/* si el producto tiene colores, pasarlo por props */}
-          <InputsColores elegidos={colores} setColors={setColores} />
+          <InputsColores
+            colors={producto.data || []}
+            elegidos={colores}
+            setColors={setColores}
+          />
         </div>
 
         <div className="rightContainer">
-          <h3>Psyduck</h3>
-
+          <h3>{producto.nombre_producto}</h3>
+          <div className="tipo_tamaño">
+            <h4>Tamaño :</h4> <h5>{producto.nombre_tamaño}</h5>
+          </div>
           <textarea
             placeholder="Dedicatoria (opcional)"
             className="inputText"
