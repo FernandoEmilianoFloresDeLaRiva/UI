@@ -34,11 +34,12 @@ export default function InputsColores({colors = ['#ffd200', '#ff8000', '#6c4675'
                             return <input 
                             type="checkbox"
                             className='inputColor' 
-                            name='colors'
+                            name='colorsSelected'
                             value={color}
                             onClick={removeColor} 
                             id='color1'
-                            style={{backgroundColor: color}} 
+                            style={{backgroundColor: color}}
+                             
                             />
                         })
                     }
@@ -48,13 +49,15 @@ export default function InputsColores({colors = ['#ffd200', '#ff8000', '#6c4675'
                 {
                     colors.map( color =>{
                         return <input 
-                        type="checkbox" 
+                        type="radio" 
                         className='inputColor' 
                         name='colors'
                         onClick={addColor}
                         value={color} 
                         id='color1'
                         style={{backgroundColor: color}} 
+                        required
+                        multiple
                         />
                     })
                 }

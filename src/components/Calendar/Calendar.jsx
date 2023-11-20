@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './Calendar.css'
 import { useEffect } from 'react'
 import CallendarCell from '../CallendarCell/CallendarCell'
+import OrderList from '../OrderList/OrderList'
 
 
 export default function Calendar () {
@@ -14,6 +15,12 @@ export default function Calendar () {
     const days = []
     const auxDays = []
 
+    //sucesfulDrag sirve para validar si se realizo correctamente el Drag
+
+    const [sucesfulDrag, setSuccess] = useState(false)
+
+    //order y ordersToDo son peticiones
+
     const orders = [
         {day: 3, order: 45346, hour: '12-1 PM' },
         {day: 3, order: 48266, hour: '1-2 PM' },
@@ -22,6 +29,15 @@ export default function Calendar () {
         {day: 22, order: 25435, hour: '10-11AM'}
      ]
 
+     const ordersToDo = [
+        {order: 45346, hour: '12-1 PM' },
+        {order: 48266, hour: '1-2 PM' },
+        {order: 56749, hour: '2-3 PM'},
+        {order: 75864, hour: '5-6 PM'},
+        {order: 25435, hour: '10-11AM'}
+     ]
+        
+     //selectOrders sirve para obtener los pedidos de un dia del mes
      const selectOrders = (day) =>{
         const dayOrders = orders.filter(order => order.day === day)
         return dayOrders
@@ -76,51 +92,57 @@ export default function Calendar () {
     }
 
     return(
-        <section>
+        <section className='containerCalendar'>
 
-            <div className='containerMonth'>
-                <button onClick={decreaseMonth}> - </button>
-                <h2>{month}</h2>
-                <button onClick={increaseMonth}>  + </button>
+            <div>
+                <header className='containerMonth'>
+                    <button onClick={decreaseMonth}> - </button>
+                    <h2>{month}</h2>
+                    <button onClick={increaseMonth}>  + </button>
+                </header>   
+                
+
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Lunes</td>
+                            <td>Martes</td>
+                            <td>Miercoles</td>
+                            <td>Jueves</td>
+                            <td>Viernes</td>
+                            <td>Sabado</td>
+                            <td>Domingo</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            {
+                                auxDays.map(row =>{
+                                    return <tr>
+                                        {
+                                            row.map( day =>{
+                                                let dayOrders = []
+                                                if(day !== 0){
+                                                    dayOrders = selectOrders(day)
+                                                    console.log(dayOrders)
+                                                }
+                                                return <CallendarCell day={day} month={index} year={2023} dayOrders={dayOrders} setSuccess={setSuccess}/>
+                                            })
+                                        }
+                                    </tr>
+                                    
+                                    
+                                })
+                                
+                            }
+
+                        
+                    </tbody>
+                </table>
+
             </div>
+
+            <OrderList monthOrders={orders} sucess={sucesfulDrag} setSuccess={setSuccess}/>
             
-
-            <table>
-                <thead>
-                    <tr>
-                        <td>Lunes</td>
-                        <td>Martes</td>
-                        <td>Miercoles</td>
-                        <td>Jueves</td>
-                        <td>Viernes</td>
-                        <td>Sabado</td>
-                        <td>Domingo</td>
-                    </tr>
-                </thead>
-                <tbody>
-                        {
-                            auxDays.map(row =>{
-                                 return <tr>
-                                    {
-                                        row.map( day =>{
-                                            let dayOrders = []
-                                            if(day !== 0){
-                                                dayOrders = selectOrders(day)
-                                                console.log(dayOrders)
-                                            }
-                                            return <CallendarCell day={day} month={index} year={2023} dayOrders={dayOrders} />
-                                        })
-                                    }
-                                </tr>
-                                
-                                
-                            })
-                            
-                        }
-
-                    
-                </tbody>
-            </table>
 
 
         </section>
