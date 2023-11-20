@@ -3,7 +3,7 @@ import { authActions } from "../actions/auth.actions";
 import { postUsuario } from "../../../services/services/auth/postUsuario";
 
 export const postUserAsync = createAsyncThunk(
-  authActions.postAuth,
+  authActions.postAuth, 
   async (payload) => {
     try {
       const objeto = {

@@ -7,9 +7,13 @@ export const getProductos = async (
   orden = "nombre_producto"
 ) => {
   try {
+    const newRes = []
     const res = await apiGet(
       `${PRODUCTOS_BASE}?page=${page}&limit=${limit}&orden=${orden}`
     );
+    // res.forEach( (producto) => {
+
+    // });
     return res;
   } catch (err) {
     console.error("Error fetching: ", err);

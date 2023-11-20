@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PrivateRoute from "../PrivateRoute.js";
 import Home from "../../pages/Home/Home.jsx";
 import IndexCatalogo from "../../pages/IndexCatalogo/IndexCatalogo.jsx";
@@ -8,10 +8,21 @@ import Calendar from "../../pages/Calendar/Calendar";
 import ProductInfo from "../../pages/ProductInfo/ProductInfo";
 import NavHeader from "../../components/NavHeader/NavHeader.jsx";
 import Bell from "../../components/BellNotification/Bell.jsx";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { inicializarSocket } from "../../utilities/inicializarSocket.js";
+import Personalizado from "../../pages/ProductoPeronalizado/Personalizado.jsx";
+import { getColorsAsync } from "../../redux/Colors/Thunks/getColors.async.js";
 
 function PrivateRoutes() {
-  const objectAuth = useSelector((state) => state.auth)
+  const dispatch = useDispatch();
+  const objectAuth = useSelector((state) => state.auth);
+  useEffect(() => {
+    const socket = inicializarSocket();
+    dispatch(getColorsAsync());
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
   return (
     <>
       {objectAuth.isAuth && (
@@ -36,14 +47,10 @@ function PrivateRoutes() {
         <ProductInfo />
       </PrivateRoute>
       <PrivateRoute pathName="/personalizado" auth={objectAuth.isAuth}>
-        <OrderProduct personalized={true} />
+        <Personalizado />
       </PrivateRoute>
       <PrivateRoute pathName="/producto" auth={objectAuth.isAuth}>
-        <OrderProduct
-          personalized={false}
-          nameProduct={"Psyduck"}
-          // productImages={testingImages}
-        />
+        <OrderProduct />
       </PrivateRoute>
     </>
   );

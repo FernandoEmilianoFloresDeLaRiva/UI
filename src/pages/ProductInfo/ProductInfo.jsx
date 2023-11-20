@@ -1,9 +1,8 @@
-import image from "../../images/image-purple.svg";
 import ContainerImages from "../../components/ContainerImages/ContainerImages";
 import ProductColor from "../../components/ProductColor/ProductColor";
 import "./ProductInfo.css";
 
-export default function ProductInfo({ admin, usuario }) {
+export default function ProductInfo(  ) {
   const products = [
     {
       name: "Psyduck",
@@ -62,15 +61,6 @@ export default function ProductInfo({ admin, usuario }) {
                 <span>{product.quantity}</span>
               </div>
             </div>
-
-            {admin ? (
-              <div className="containerButtons">
-                <button className="purpleButton">ACEPTAR</button>
-                <button className="purpleButton">RECHAZAR</button>
-              </div>
-            ) : (
-              <></>
-            )}
           </article>
         );
       })}

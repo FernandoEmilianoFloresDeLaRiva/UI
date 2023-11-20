@@ -1,96 +1,123 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import menos from "../../images/minus-solid.svg";
 import mas from "../../images/plus-solid.svg";
 import InputsColores from "../../components/InputsColores/InputsColores";
-import "./OrderProduct.css";
+import "./Personalizado.css";
 import Card from "../../components/Card/Card";
 import Select from "../../components/Select/Select";
-import ContainerImages from "../../components/ContainerImages/ContainerImages";
-import { postEntregaAsync } from "../../redux/Entregas/thunks/postEntrega.async";
+import InputImage from "../../components/InputImage/InputImage";
 import { useDispatch, useSelector } from "react-redux";
+import { postEntregaAsync } from "../../redux/Entregas/thunks/postEntrega.async";
 
-export default function OrderProduct() {
-  const { token } = useSelector((state) => state.auth);
+export default function Personalizado() {
   const dispatch = useDispatch();
-  //recuperar producto del contexto
-
-  //Recuperar imagenes
-  // const productImages = [
-  //   "https://images4-a.ravelrycache.com/uploads/loopycathrine/607713742/F8A2A9DB-F8CF-441E-B65D-46108C308F1E_medium2.jpeg",
-  //   "https://i5.walmartimages.com/seo/Piusho-Action-Figure-7-5-GK-Muscle-Psyduck-Vinyl-Figure-Exquisite-Figurine-for-Collection-Home-Decoration-Perfect-Gift-for-Boys-Girls_006c6c76-3a2c-4fe1-b6ac-165ae0965670.1fa78d68c27fa8f4638c084333f85762.jpeg?odnHeight=768&odnWidth=768&odnBg=FFFFFF",
-  //   "https://ae01.alicdn.com/kf/S4ea4065dddfa4b469a3c5686c7dc9e67f/Figura-de-acci-n-de-Pok-mon-Pikachu-Psyduck-Squirtle-juguete-divertido-de-Anime-modelo-de.jpg",
-  // ];
-
-  //cambiar estado inicial por los colores del producto
-  //Atributos de los objetos
-  const [colores, setColores] = useState([]);
-  const [products, setProducts] = useState(1);
-  const [lugar, setLugar] = useState("");
-  const [dedicatoria, setDedicatoria] = useState("");
-  const [horario, setHorario] = useState("");
-  const [fecha, setFecha] = useState(null);
-  //----------------------
+  const { token } = useSelector((state) => state.auth);
+  const colors = useSelector((state) => state.colors);
   const date = new Date();
   const [special, setSpecial] = useState(false);
-
+  //atributos de productos
+  const [products, setProducts] = useState(1);
+  const [coloresElegidos, setColores] = useState([]);
+  const [img, setImg] = useState([]);
+  const [nombre, setNombre] = useState("");
+  const [id_tamaño, setId_tamaño] = useState(null);
+  const [lugar, setLugar] = useState("");
+  const [horario, setHorario] = useState("");
+  const [especificacion, setEspecificacion] = useState("");
+  const [dedicatoria, setDedicatoria] = useState("");
+  const [fecha, setFecha] = useState(null);
+  useEffect(() => {
+    if (id_tamaño === "Pequeño") setId_tamaño(1);
+    else if (id_tamaño === "Mediano") setId_tamaño(2);
+    else if (id_tamaño === "Grande") setId_tamaño(3);
+    else return;
+  }, [id_tamaño, colors]);
+  //-------------------------------------
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newColoresElegidos = [];
+    coloresElegidos.forEach(({ id_color }) =>
+      newColoresElegidos.push(id_color)
+    );
+    const producto = {
+      nombre_producto: nombre,
+      precio: 50,
+      id_tamaño,
+      tipo_producto: 2,
+      imagenes: img,
+      colores: newColoresElegidos,
+    };
+    const pedido = {
+      nombre_pedido: nombre,
+      cantidad: products,
+      especificacion,
+      dedicatoria,
+      status: false,
+      colores: newColoresElegidos,
+    };
+    const entrega = {
+      lugar,
+      horario,
+      fecha,
+      total: producto.precio * pedido.cantidad,
+    };
+    const data = {
+      token,
+      data: {
+        producto: { ...producto },
+        pedido: { ...pedido },
+        entrega: { ...entrega },
+      },
+    };
+    dispatch(postEntregaAsync(data));
+  };
   const deliveryPoints = [
     "Plaza paso limón",
     "Parque del oriente",
     "Convivencia infantil",
   ];
+  const sizes = ["Pequeño", "Mediano", "Grande"];
   const schedule = ["1-2 PM", "2-3 PM", "3-4 PM", "4-5 PM", "5-6 PM"];
-
   const switchSpecial = () => {
     setSpecial(!special);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const data = {
-      token,
-      //id del producto en el contexto
-      data: {
-        id_productoNew: "2218a179-9a10-4816-a878-291999c8b154",
-        pedido: {
-          //nombre del producto en contexto
-          nombre_pedido: "Tulipanes Rojos",
-          cantidad: products,
-          especificacion: "",
-          dedicatoria,
-          status: true,
-          colores,
-        },
-        entrega: {
-          lugar,
-          horario,
-          fecha,
-          //total del producto en contexto
-          total: 0,
-        },
-      },
-    };
-    dispatch(postEntregaAsync(data));
   };
 
   return (
     <Card>
       <form className="deliveryForm" onSubmit={handleSubmit}>
         <div className="leftContainer">
-          <ContainerImages images={[]} />
-
-          {/* si el producto tiene colores, pasarlo por props */}
-          <InputsColores elegidos={colores} setColors={setColores} />
+          <InputImage setImg={setImg} />
+          <InputsColores
+            colors={colors}
+            setColors={setColores}
+            elegidos={coloresElegidos}
+          />
         </div>
 
         <div className="rightContainer">
-          <h3>Psyduck</h3>
+          <input
+            onChange={({ target }) => setNombre(target.value)}
+            placeholder="Nombre"
+            className="inputText"
+            id="nombre"
+            required
+            name="nombre"
+          />
 
           <textarea
+            onChange={({ target }) => setDedicatoria(target.value)}
             placeholder="Dedicatoria (opcional)"
             className="inputText"
             id="dedicatoria"
             name="dedicatoria"
-            onChange={({ target }) => setDedicatoria(target.value)}
+          />
+
+          <textarea
+            onChange={({ target }) => setEspecificacion(target.value)}
+            placeholder="Especificaciones"
+            className="inputText"
+            id="especificaciones"
+            name="especificaciones"
           />
 
           <Select
@@ -99,6 +126,13 @@ export default function OrderProduct() {
             id={"lugarEntrega"}
             defaultText={"Seleccione el punto de entrega"}
             options={deliveryPoints}
+          />
+          <Select
+            funcion={setId_tamaño}
+            labelText={"Tamaño"}
+            id={"tamaño"}
+            defaultText={"Seleccione el tamaño"}
+            options={sizes}
           />
           <Select
             funcion={setHorario}
@@ -167,12 +201,13 @@ export default function OrderProduct() {
           <button className="whiteButton">ACEPTAR</button>
           {special ? (
             <small>
-              *Debes esperar a que Shinycrochet confirme si es posible realizar
-              tu pedido en la fecha deseada
+              *Debes esperar a que Shynicrochet confirme si es posible entregar
+              y realizar el producto en la fecha deseada
             </small>
           ) : (
             <small>
-              *Debes esperar a que Shinycrochet confirme la fecha de tu pedido
+              *Debes esperar a que Shinycrochet confirme si es posible realizar
+              tu pedido
             </small>
           )}
         </div>
