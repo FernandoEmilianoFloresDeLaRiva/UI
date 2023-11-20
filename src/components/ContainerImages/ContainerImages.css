@@ -1,0 +1,42 @@
+.imagePreview{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 1em;
+    
+}
+
+.backArrow img , .nextArrow img{
+    width: 40%;
+}
+
+.backArrow, .nextArrow{
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.3);
+    width: 10%;
+    height: 5em;
+    color: white;
+    display: block;
+}
+
+.nextArrow{
+    right: 0;
+    border-radius: 1em 0 0 1em;
+}
+
+.backArrow{
+    left: 0;
+    border-radius: 0 1em 1em 0;
+}
+
+.containerImages{
+    width: 25vmax;
+    height: 20vmax;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1em;
+    position: relative;
+    min-width: 200px;
+    min-height: 150px;
+}
