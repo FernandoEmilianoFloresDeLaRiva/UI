@@ -141,7 +141,7 @@ export default function Calendar () {
 
             </div>
 
-            <OrderList monthOrders={orders} sucess={sucesfulDrag} setSuccess={setSuccess}/>
+            <OrderList monthOrders={ordersToDo} sucess={sucesfulDrag} setSuccess={setSuccess}/>
             
 
 
