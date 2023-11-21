@@ -8,15 +8,16 @@ export default function CallendarCell({ day, month, year, dayOrders }) {
           <span className="day">
             {day}-{month}-{year}
           </span>
-          {dayOrders.map((order) => {
-            console.log(order);
-            return (
-              <span className="orderSpan">
-                <span>{order.hour}</span>
-                <span>#{order.order}</span>
-              </span>
-            );
-          })}
+          {dayOrders
+            .filter((orderMonth) => month === orderMonth.month)
+            .map((order) => {
+              return (
+                <span className="orderSpan">
+                  <span>{order.hour}</span>
+                  <span>#{order.order}</span>
+                </span>
+              );
+            })}
         </td>
       ) : (
         <td className="disabled"></td>

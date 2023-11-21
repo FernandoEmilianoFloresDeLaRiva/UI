@@ -1,16 +1,32 @@
-.notifications{
-    margin-top: 1vh;
-    z-index: 2;
-    position: fixed;
-    right: 3%;
-    width: 20%;
-    height: 10%;
-    border-radius: 5em;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    flex-wrap: wrap;
-    background-color: #9c87e0;
-    border-color: transparent;
-    box-shadow: 0 0 5px 2px #6d97ba
+.notifications {
+  transition: all 1s;
+  animation: shine 2.5s both;
+  margin-top: 1vh;
+  z-index: 2;
+  position: fixed;
+  right: 3%;
+  width: 20%;
+  height: 10%;
+  border-radius: 5em;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+  background-color: #9c87e0;
+  border-color: transparent;
+  box-shadow: 0 0 5px 2px #6d97ba;
+}
+
+@keyframes shine {
+  0% {
+   color: #2B3246;
+  }
+  50% {
+    text-shadow:
+      0 0 5px #fff,
+      0 0 10px #fff,
+      0 0 40px #6d97ba,
+      0 0 60px red,
+      0 0 80px #6d97ba;
+  }
 }

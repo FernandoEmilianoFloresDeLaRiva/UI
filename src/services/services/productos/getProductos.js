@@ -10,6 +10,7 @@ export const getProductos = async (
     const res = await apiGet(
       `${PRODUCTOS_BASE}?page=${page}&limit=${limit}&orden=${orden}`
     );
+
     return res;
   } catch (err) {
     console.error("Error fetching: ", err);

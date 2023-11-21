@@ -1,75 +1,98 @@
-import image from "../../images/image-purple.svg";
 import ContainerImages from "../../components/ContainerImages/ContainerImages";
 import ProductColor from "../../components/ProductColor/ProductColor";
 import "./ProductInfo.css";
+import { usePedidos } from "../../hooks/usePedidos";
+import { useSelector } from "react-redux";
+import { deleteLogicoPedido } from "../../services/services/pedidos/deleteLogicoPedido";
+import { acceptPedido } from "../../services/services/pedidos/acceptPedido";
+import { number } from "prop-types";
 
 export default function ProductInfo() {
-  const products = [
-    {
-      name: "Psyduck",
-      productImages: [
-        "https://images4-a.ravelrycache.com/uploads/loopycathrine/607713742/F8A2A9DB-F8CF-441E-B65D-46108C308F1E_medium2.jpeg",
-        "https://i5.walmartimages.com/seo/Piusho-Action-Figure-7-5-GK-Muscle-Psyduck-Vinyl-Figure-Exquisite-Figurine-for-Collection-Home-Decoration-Perfect-Gift-for-Boys-Girls_006c6c76-3a2c-4fe1-b6ac-165ae0965670.1fa78d68c27fa8f4638c084333f85762.jpeg?odnHeight=768&odnWidth=768&odnBg=FFFFFF",
-        "https://ae01.alicdn.com/kf/S4ea4065dddfa4b469a3c5686c7dc9e67f/Figura-de-acci-n-de-Pok-mon-Pikachu-Psyduck-Squirtle-juguete-divertido-de-Anime-modelo-de.jpg",
-      ],
-      price: 250,
-      color: ["#e45f67", "#000", "#e6f"],
-      deliveryPoint: "La Mision",
-      date: "12-12-23",
-      quantity: 2,
-    },
-    {
-      name: "Pikachu",
-      productImages: [
-        "https://m.media-amazon.com/images/I/61CSIeRXieL._UF1000,1000_QL80_.jpg",
-        "https://amigurumi.meteoorfiles.com/images/amigurumi-62Pikachu-Pokemon.jpeg",
-      ],
-      price: 300,
-      color: ["#f4dc26", "#e92929", "#5c3613", "#000"],
-    },
-  ];
-
-  const getUserProducts = () => {
-    //las peticiones necesarias para obtener los pedidos de un usuario
+  const { token } = useSelector((state) => state.auth);
+  const { pedidos, isLoading } = usePedidos();
+  const handleDelete = async (id) => {
+    try {
+      const res = await deleteLogicoPedido(id, token);
+      if (typeof res === number) window.alert("error eliminando el producto");
+      const { message } = res;
+      window.alert(message);
+      window.location.reload();
+    } catch (err) {
+      console.error("Error rechazando pedido ", err);
+      throw err;
+    }
   };
-
+  const handleAccept = async (id) => {
+    try {
+      const res = await acceptPedido(id, token);
+      if (typeof res === number) window.alert("error aceptando el producto");
+      const { message } = res;
+      window.alert(message);
+      window.location.reload();
+    } catch (err) {
+      console.error("Error rechazando pedido ", err);
+      throw err;
+    }
+  };
   return (
     <section className="ProductInfo">
       <h1>PEDIDOS</h1>
+      {isLoading ? (
+        <h1>Cargando...</h1>
+      ) : (
+        pedidos.map(
+          ({
+            id_pedido,
+            id_producto,
+            nombre_pedido,
+            precio,
+            lugar,
+            fecha,
+            cantidad,
+          }) => {
+            return (
+              <article className="containerProduct" key={id_pedido}>
+                <ContainerImages token={token} id={id_producto} />
+                <div className="containerProductInfo">
+                  <h3>{nombre_pedido}</h3>
+                  <div className="containerFlexInfo">
+                    <span>Precio: </span>
+                    <span>${precio}.00</span>
+                  </div>
+                  <ProductColor id={id_pedido} token={token} />
+                  <div className="containerFlexInfo">
+                    <span>Entrega: </span>
+                    <span>{lugar}</span>
+                  </div>
+                  <div className="containerFlexInfo">
+                    <span>Fecha:</span>
+                    <span>{fecha}</span>
+                  </div>
+                  <div className="containerFlexInfo">
+                    <span>Cantidad:</span>
+                    <span>{cantidad}</span>
+                  </div>
+                </div>
 
-      {products.map((product) => {
-        return (
-          <article className="containerProduct">
-            <ContainerImages images={product.productImages} />
-            <div className="containerProductInfo">
-              <h3>{product.name}</h3>
-              <span> Dedicatoria: </span>
-              <div className="containerFlexInfo">
-                <span>Precio: </span>
-                <span>${product.price}.00</span>
-              </div>
-              <ProductColor colors={product.color} />
-              <div className="containerFlexInfo">
-                <span>Entrega: </span>
-                <span>{product.deliveryPoint}</span>
-              </div>
-              <div className="containerFlexInfo">
-                <span>Fecha:</span>
-                <span>{product.date}</span>
-              </div>
-              <div className="containerFlexInfo">
-                <span>Cantidad:</span>
-                <span>{product.quantity}</span>
-              </div>
-            </div>
-
-            <div className="containerButtons">
-              <button className="purpleButton">ACEPTAR</button>
-              <button className="purpleButton">RECHAZAR</button>
-            </div>
-          </article>
-        );
-      })}
+                <div className="containerButtons">
+                  <button
+                    className="purpleButton"
+                    onClick={() => handleAccept(id_pedido)}
+                  >
+                    ACEPTAR
+                  </button>
+                  <button
+                    className="purpleButton"
+                    onClick={() => handleDelete(id_pedido)}
+                  >
+                    RECHAZAR
+                  </button>
+                </div>
+              </article>
+            );
+          }
+        )
+      )}
     </section>
   );
 }

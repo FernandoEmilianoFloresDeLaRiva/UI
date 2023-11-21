@@ -7,12 +7,14 @@ function ContainerCatalogo({ productos, title }) {
     <div className={styles.container}>
       <h2>{title}</h2>
       <div className={styles.containerArticles}>
-        {productos.map((producto) =>
+        {productos.map(({ id_producto, nombre_producto, precio }) => (
           <ArticleCatalogo
-          nombreProducto={producto.nombre}
-          precioProducto={producto.precio}
-        />
-        )}
+            key={id_producto}
+            id={id_producto}
+            nombreProducto={nombre_producto}
+            precioProducto={precio}
+          />
+        ))}
       </div>
     </div>
   );
