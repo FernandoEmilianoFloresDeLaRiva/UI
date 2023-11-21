@@ -1,17 +1,17 @@
 import { useState, useEffect } from "react";
 import InputsColores from "../../components/InputsColores/InputsColores";
-import "./CreateProduct.css";
+import "./UpdateProduct.css";
 import Card from "../../components/Card/Card";
 import Select from "../../components/Select/Select";
 import InputImage from "../../components/InputImage/InputImage";
 import { useSelector, useDispatch } from "react-redux";
 import { postProductoAsync } from "../../redux/Producto/thunks/postProducto.async";
 
-export default function CreateProduct({ token }) {
+export default function UpdateProduct({ token }) {
   const dispatch = useDispatch();
   const colors = useSelector((state) => state.colors);
   const sizes = ["Chico", "Mediano", "Grande"];
-  //atributos del producto
+  //atributos del producto, inicializarlos con objeto que esta dentro del contexto
   const [img, setImg] = useState([]);
   const [coloresElegidos, setColoresElegidos] = useState([]);
   const [nombre, setNombre] = useState("");

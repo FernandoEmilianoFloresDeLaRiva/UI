@@ -7,5 +7,4 @@ socketclient.on("connect", () => {
   socketclient.emit("nueva entrega", {
     message: "un nuevo producto se ha ordenado",
   });
-  
 });

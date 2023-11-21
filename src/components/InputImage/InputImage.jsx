@@ -1,46 +1,44 @@
-import './InputImage.css'
-import image from '../../images/image-purple.svg'
-import { useRef } from 'react'
-import { useState } from 'react'
-import ContainerImages from '../ContainerImages/ContainerImages'
+import "./InputImage.css";
+import image from "../../images/image-purple.svg";
+import { toBase64 } from "../../utilities/toBase64";
+import { useState } from "react";
 
-export default function InputImage(){
-
-    const [existingImage, setExisting] = useState(false)
-    const [images, setImages] = useState([])
-    const inputImage = useRef(null)
-
-    const previewImage = () =>{
-
-        const inputImages = inputImage.current.files
-        if(inputImages.length !== 0){
-            for(let i = 0; i < inputImages.length; i++){
-                images.push(URL.createObjectURL(inputImages[i]))    
-            }
-    
-            setImages([...images])
-            setExisting(true)
-            console.log(images)
-        }
+export default function InputImage({ setImg }) {
+  const [existingImage, setExisting] = useState(false);
+  const [images, setImages] = useState([]);
+  const previewImage = async ({ target }) => {
+    try {
+      setImages((prev) => [...prev, URL.createObjectURL(target.files[0])]);
+      setExisting(true);
+      const b64 = await toBase64(target);
+      setImg((prev) => [...prev, { b64, extension: "jpg" }]);
+    } catch (err) {
+      console.error("error subiendo la imagen, intente de nuevo");
+      window.alert("error subiendo la imagen, intente de nuevo");
     }
+  };
 
-
-    return(
-        <div className='containerInputImage'>
-            {
-                !existingImage ? 
-                <>
-                    <input type="file" id="image" name="image" required accept="image/*" ref={inputImage} onChange={previewImage} multiple/>
-                    <label htmlFor="image">
-                        <img src={image} alt="imagen" />
-                        Foto de tu idea
-                    </label>
-                </>
-                :   
-                <ContainerImages images={images}/>
-                
-
-            }
-        </div>
-    )
+  return (
+    <div className="containerInputImage">
+      {!existingImage ? (
+        <>
+          <input
+            type="file"
+            id="image"
+            name="image"
+            required
+            accept="image/*"
+            onChange={previewImage}
+            multiple
+          />
+          <label htmlFor="image">
+            <img src={image} alt="imagen" />
+            Foto de tu idea
+          </label>
+        </>
+      ) : (
+        <img src={images[0]} alt="imagen brindada" />
+      )}
+    </div>
+  );
 }

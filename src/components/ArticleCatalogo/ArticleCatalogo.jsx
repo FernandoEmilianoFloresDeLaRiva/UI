@@ -34,7 +34,7 @@ function ArticleCatalogo({ nombreProducto, precioProducto, id }) {
       <div className={styles.contents}>
         <p>${precioProducto}</p>
         <div className={styles.icons}>
-          <Link to="/modificar/5">
+          <Link to="/modificar">
             <img src={edit} />
           </Link>
           <img src={trash} onClick={handleDelete} />

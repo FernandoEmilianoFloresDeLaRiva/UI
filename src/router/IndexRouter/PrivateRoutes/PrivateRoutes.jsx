@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { inicializarSocket } from "../../../utilities/inicializarSocket.js";
 import { getColorsAsync } from "../../../redux/Colors/Thunks/getColors.async.js";
 import { getEntregasAsync } from "../../../redux/Entregas/thunks/getEntregas.async.js";
+import UpdateProduct from "../../../pages/UpdateProduct/UpdateProduct.jsx";
 function PrivateRoutes({ auth }) {
   const dispatch = useDispatch();
   const { token } = useSelector((state) => state.auth);
@@ -36,10 +37,10 @@ function PrivateRoutes({ auth }) {
         <ProductInfo />
       </PrivateRoute>
       <PrivateRoute pathName={"/crearProducto"} auth={auth}>
-        <CreateProduct />
+        <CreateProduct token={token} />
       </PrivateRoute>
-      <PrivateRoute pathName={"/modificar/:id"} auth={auth}>
-        <CreateProduct />
+      <PrivateRoute pathName={"/modificar"} auth={auth}>
+        <UpdateProduct />
       </PrivateRoute>
     </>
   );

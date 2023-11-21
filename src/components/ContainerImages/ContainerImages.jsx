@@ -27,6 +27,7 @@ export default function ContainerImages({ token, id }) {
 
   return (
     <div className="containerImages">
+      {isLoading && <p>Cargando Imagen del producto...</p>}
       <img
         ref={refContainer}
         alt="Imagen de producto"

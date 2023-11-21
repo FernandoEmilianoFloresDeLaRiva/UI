@@ -1,3 +1,4 @@
 export const productoActions = {
-    setProducto : "producto/setProducto"
+    setProducto : "producto/setProducto",
+    postProducto : "producto/postProducto"
 }

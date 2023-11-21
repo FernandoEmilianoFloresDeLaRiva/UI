@@ -1,37 +1,24 @@
-import { useState } from "react";
 import "./InputsColores.css";
 
 export default function InputsColores({
-  colors = [
-    "#ffd200",
-    "#ff8000",
-    "#6c4675",
-    "#f50087",
-    "#cb3234",
-    "#00a86b",
-    "92c5fc",
-    "#393d42",
-    "#2d572c",
-    "#4b3621",
-    "#faf00c",
-  ],
+  colors = [],
+  setColores: setColors,
+  elegidos,
 }) {
-  const [selectedColors, setColors] = useState([]);
-
   const addColor = (e) => {
-    selectedColors.push(e.target.value);
     e.target.disabled = true;
-    setColors([...selectedColors]);
+    setColors((prev) => [
+      ...prev,
+      { id_color: e.target.value, codigo_color: e.target.name },
+    ]);
   };
 
   const removeColor = (e) => {
     const colorRemove = e.target.value;
-    const auxArryay = selectedColors.filter(
-      (currentColor) => currentColor !== colorRemove
+    const auxArryay = elegidos.filter(
+      ({ id_color }) => id_color !== colorRemove
     );
-
     setColors([...auxArryay]);
-
     const inputColor = document.querySelector(
       `.containerColors input[value='${colorRemove}']`
     );
@@ -42,32 +29,32 @@ export default function InputsColores({
     <div>
       <div className="selectedColors">
         <span>Colores :</span>
-        {selectedColors.map((color) => {
+        {elegidos.map(({ codigo_color, id_color }) => {
           return (
             <input
               type="checkbox"
               className="inputColor"
               name="colors"
-              value={color}
+              value={id_color}
               onClick={removeColor}
               id="color1"
-              style={{ backgroundColor: color }}
+              style={{ backgroundColor: codigo_color }}
             />
           );
         })}
       </div>
 
       <div className="containerColors">
-        {colors.map((color) => {
+        {colors.map(({ codigo_color, id_color }) => {
           return (
             <input
               type="checkbox"
               className="inputColor"
-              name="colors"
+              name={codigo_color}
               onClick={addColor}
-              value={color}
+              value={id_color}
               id="color1"
-              style={{ backgroundColor: color }}
+              style={{ backgroundColor: codigo_color }}
             />
           );
         })}
