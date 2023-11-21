@@ -17,11 +17,8 @@ function PrivateRoutes() {
   const dispatch = useDispatch();
   const { isAuth, token } = useSelector((state) => state.auth);
   useEffect(() => {
-    const socket = inicializarSocket();
+    inicializarSocket();
     dispatch(getColorsAsync());
-    return () => {
-      socket.disconnect();
-    };
   }, []);
   return (
     <>
@@ -44,7 +41,7 @@ function PrivateRoutes() {
         <Calendar />
       </PrivateRoute>
       <PrivateRoute pathName={"/pedidos"} auth={isAuth}>
-        <ProductInfo />
+        <ProductInfo token={token}/>
       </PrivateRoute>
       <PrivateRoute pathName="/personalizado" auth={isAuth}>
         <Personalizado />

@@ -69,10 +69,7 @@ export default function OrderProduct({ token }) {
     <Card>
       <form className="deliveryForm" onSubmit={handleSubmit}>
         <div className="leftContainer">
-          <ContainerImages
-            token={token}
-            id={producto.id_producto}
-          />
+          <ContainerImages token={token} id={producto.id_producto} />
 
           {/* si el producto tiene colores, pasarlo por props */}
           <InputsColores

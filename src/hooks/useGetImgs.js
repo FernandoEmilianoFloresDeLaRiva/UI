@@ -18,8 +18,7 @@ export const useGetImgs = (token, id_producto, ref) => {
           window.alert(
             "Su sesión de usuario ha vencido, favor de iniciar de nuevo"
           );
-          console.log("Sesion terminada, redirigiendo...")
-          window.location.reload()
+          console.log("Sesion terminada, redirigiendo...");
         }
         const imgBlob = await img.blob();
         const newUrl_img = URL.createObjectURL(imgBlob);

@@ -6,7 +6,6 @@ import PrivateRoutes from "../PrivateRoutes/PrivateRoutes.jsx";
 import { useSelector } from "react-redux";
 
 function IndexRoute() {
-  
   const objectAuth = useSelector((state) => state.auth);
   return (
     <div className="App">
