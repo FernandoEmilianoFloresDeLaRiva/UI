@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 
 export default function Calendar() {
   const orders = useSelector((state) => state.entrega);
-  console.log(orders)
   const months = [
     "ENERO",
     "FEBRERO",
@@ -108,7 +107,7 @@ export default function Calendar() {
                   let dayOrders = [];
                   if (day !== 0) {
                     dayOrders = selectOrders(day);
-                    console.log(dayOrders);
+
                   }
                   return (
                     <CallendarCell
