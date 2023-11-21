@@ -12,20 +12,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { inicializarSocket } from "../../utilities/inicializarSocket.js";
 import Personalizado from "../../pages/ProductoPeronalizado/Personalizado.jsx";
 import { getColorsAsync } from "../../redux/Colors/Thunks/getColors.async.js";
+import { getEntregasAsync } from "../../redux/Entregas/thunks/getEntregas.async";
 
 function PrivateRoutes() {
   const dispatch = useDispatch();
   const { isAuth, token } = useSelector((state) => state.auth);
   useEffect(() => {
     inicializarSocket();
-    dispatch(getColorsAsync());
+    dispatch(getColorsAsync(token));
+    dispatch(getEntregasAsync(token));
   }, []);
   return (
     <>
       {isAuth && (
         <>
           <NavHeader />
-          <Bell />
+          {/* si da tiempo se agregara socket para que reciba notificacion el usuario cuando se acepte u rechaze su pedido */}
+          {/* <Bell /> */}
         </>
       )}
       <PrivateRoute pathName={"/"} auth={isAuth}>
@@ -38,10 +41,10 @@ function PrivateRoutes() {
         <ClientService />
       </PrivateRoute>
       <PrivateRoute pathName={"/calendario"} auth={isAuth}>
-        <Calendar />
+        <Calendar token={token} />
       </PrivateRoute>
       <PrivateRoute pathName={"/pedidos"} auth={isAuth}>
-        <ProductInfo token={token}/>
+        <ProductInfo token={token} />
       </PrivateRoute>
       <PrivateRoute pathName="/personalizado" auth={isAuth}>
         <Personalizado />

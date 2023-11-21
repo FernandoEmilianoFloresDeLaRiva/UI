@@ -1,3 +1,4 @@
 export const entregasActions = {
-    postEntrega : "entrega/postEntrega"
+    postEntrega : "entrega/postEntrega",
+    getEntregas : "entrega/getEntregas",
 }

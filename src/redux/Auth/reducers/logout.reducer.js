@@ -3,6 +3,6 @@ import { socket } from "../../../utilities/inicializarSocket";
 
 export const logoutReducer = (state, action) => {
   window.localStorage.removeItem("userLog");
-  socket.disconnect()
+  socket.disconnect();
   return BASE_STATE_AUTH;
 };

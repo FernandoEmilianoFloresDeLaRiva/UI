@@ -16,7 +16,7 @@ export const postEntregaAsync = createAsyncThunk(
           "Su sesión de usuario ha expirado, por favor inicie sesión otra vez"
         );
         window.localStorage.removeItem("userLog");
-        window.location.reload();
+        window.location.href("/");
         return res
       }
       socket.emit("nueva entrega", "Un cliente ha emitido una entrega")

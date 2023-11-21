@@ -2,8 +2,10 @@ import { useState } from "react";
 import "./Calendar.css";
 import { useEffect } from "react";
 import CallendarCell from "../../components/CallendarCell/CallendarCell";
+import { useSelector } from "react-redux";
 
 export default function Calendar() {
+  const orders = useSelector((state) => state.entrega);
   const months = [
     "ENERO",
     "FEBRERO",
@@ -18,21 +20,24 @@ export default function Calendar() {
     "NOVIEMBRE",
     "DICIEMBRE",
   ];
-  const [index, setIndex] = useState(new Date().getMonth());
-  const date = new Date(2023, index, 1);
+  //mes actual
+  const actualDate = new Date();
+  const [index, setIndex] = useState(actualDate.getMonth());
+  const date = new Date(actualDate.getFullYear(), index, 1);
   const firstDay = date.getDay();
+  //mes que interactua con el cliente
   const [month, setMonth] = useState(months[index]);
-  const daysMonth = new Date(2023, index + 1, 0).getDate();
+  const daysMonth = new Date(actualDate.getFullYear(), index + 1, 0).getDate();
   const days = [];
   const auxDays = [];
 
-  const orders = [
-    { day: 3, order: 45346, hour: "12-1 PM" },
-    { day: 3, order: 48266, hour: "1-2 PM" },
-    { day: 8, order: 56749, hour: "2-3 PM" },
-    { day: 14, order: 75864, hour: "5-6 PM" },
-    { day: 22, order: 25435, hour: "10-11AM" },
-  ];
+  // const orders = [
+  //   { day: 3, order: 45346, hour: "12-1 PM" },
+  //   { day: 3, order: 48266, hour: "1-2 PM" },
+  //   { day: 8, order: 56749, hour: "2-3 PM" },
+  //   { day: 14, order: 75864, hour: "5-6 PM" },
+  //   { day: 22, order: 25435, hour: "10-11AM" },
+  // ];
 
   const selectOrders = (day) => {
     const dayOrders = orders.filter((order) => order.day === day);
