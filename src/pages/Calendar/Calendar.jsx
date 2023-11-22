@@ -3,9 +3,14 @@ import "./Calendar.css";
 import { useEffect } from "react";
 import CallendarCell from "../../components/CallendarCell/CallendarCell";
 import { useSelector } from "react-redux";
+import OrderList from "../../components/OrderList/OrderList";
 
 export default function Calendar() {
   const orders = useSelector((state) => state.entrega);
+  //sucesfulDrag sirve para validar si se realizo correctamente el Drag
+
+  const [sucesfulDrag, setSuccess] = useState(false);
+
   const months = [
     "ENERO",
     "FEBRERO",
@@ -80,49 +85,52 @@ export default function Calendar() {
   };
 
   return (
-    <section>
-      <div className="containerMonth">
-        <button onClick={decreaseMonth}> - </button>
-        <h2>{month}</h2>
-        <button onClick={increaseMonth}> + </button>
+    <section className="section-pedidos">
+      <div className="containerCalendar">
+        <header className="containerMonth">
+          <button onClick={decreaseMonth}> - </button>
+          <h2>{month}</h2>
+          <button onClick={increaseMonth}> + </button>
+        </header>
+
+        <table>
+          <thead>
+            <tr>
+              <td>Lunes</td>
+              <td>Martes</td>
+              <td>Miercoles</td>
+              <td>Jueves</td>
+              <td>Viernes</td>
+              <td>Sabado</td>
+              <td>Domingo</td>
+            </tr>
+          </thead>
+          <tbody>
+            {auxDays.map((row) => {
+              return (
+                <tr>
+                  {row.map((day) => {
+                    let dayOrders = [];
+                    if (day !== 0) {
+                      dayOrders = selectOrders(day);
+                    }
+                    return (
+                      <CallendarCell
+                        day={day}
+                        month={index}
+                        year={2023}
+                        dayOrders={dayOrders}
+                        setSuccess={setSuccess}
+                      />
+                    );
+                  })}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
-
-      <table>
-        <thead>
-          <tr>
-            <td>Lunes</td>
-            <td>Martes</td>
-            <td>Miercoles</td>
-            <td>Jueves</td>
-            <td>Viernes</td>
-            <td>Sabado</td>
-            <td>Domingo</td>
-          </tr>
-        </thead>
-        <tbody>
-          {auxDays.map((row) => {
-            return (
-              <tr>
-                {row.map((day) => {
-                  let dayOrders = [];
-                  if (day !== 0) {
-                    dayOrders = selectOrders(day);
-
-                  }
-                  return (
-                    <CallendarCell
-                      day={day}
-                      month={index}
-                      year={2023}
-                      dayOrders={dayOrders}
-                    />
-                  );
-                })}
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      <OrderList sucess={sucesfulDrag} setSuccess={setSuccess} />
     </section>
   );
 }

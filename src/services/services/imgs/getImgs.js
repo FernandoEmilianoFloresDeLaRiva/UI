@@ -10,6 +10,7 @@ export const getImgs = async (id_producto, token) => {
     const { data } = resImgs;
     //data cambiara mediante el indice mandado
     //condicion para checar que el indice no es mayor al array de imagenes, si es, el indice ahora seria 0
+
     const { url_imagen } = data[0];
     const headers = {
       Authorization: `Bearer ${token}`,

@@ -7,7 +7,7 @@ import { useProductos } from "../../hooks/useProductos";
 
 function IndexCatalogo() {
   const { productos, isLoading } = useProductos();
-  console.log(productos);
+
   return (
     <div className={styles.app}>
       {isLoading ? (

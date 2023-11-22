@@ -1,5 +1,7 @@
 import { useState } from "react";
 import "./CallendarCell.css";
+import { useDispatch, useSelector } from "react-redux";
+import { patchEntregaAsync } from "../../redux/Entregas/thunks/patchEntrega.async";
 
 export default function CallendarCell({
   day,
@@ -8,13 +10,21 @@ export default function CallendarCell({
   dayOrders,
   setSuccess,
 }) {
+  const { token } = useSelector((state) => state.auth);
   const [orders, setOrders] = useState(dayOrders);
-
+  const dispatch = useDispatch();
   const addOrder = (e) => {
     const order = e.dataTransfer.getData("order");
     const hour = e.dataTransfer.getData("hour");
     setOrders((prev) => [...prev, { order: order, hour: hour }]);
     setSuccess(true);
+    dispatch(
+      patchEntregaAsync({
+        token,
+        fecha: `${year}-${month + 1}-${day + 1}`,
+        id: order,
+      })
+    );
   };
 
   return (

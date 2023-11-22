@@ -1,15 +1,17 @@
 import React from "react";
 import styles from "./ArticleCatalogo.module.css";
-import imgDefault from "../../assets/img.svg";
 import edit from "../../assets/edit.svg";
 import trash from "../../assets/trash.svg";
-import { Link } from "wouter";
 import { useGetImgs } from "../../hooks/useGetImgs";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setProductoAsync } from "../../redux/Producto/thunks/setProducto.async";
 import { useRef } from "react";
 import { deleteLogicoProducto } from "../../services/services/productos/deleteLogicoProducto";
+import { useLocation } from "wouter";
 
 function ArticleCatalogo({ nombreProducto, precioProducto, id }) {
+  const [location, setLocation] = useLocation();
+  const dispatch = useDispatch();
   const { token } = useSelector((state) => state.auth);
   const refImg = useRef(null);
   const { isLoading } = useGetImgs(token, id, refImg);
@@ -25,6 +27,16 @@ function ArticleCatalogo({ nombreProducto, precioProducto, id }) {
       throw err;
     }
   };
+  const handleEdit = async (e) => {
+    try {
+      e.preventDefault();
+      dispatch(setProductoAsync({ id, token }));
+      setLocation("/modificar");
+    } catch (err) {
+      console.error("Error editando el producto ", err);
+      throw err;
+    }
+  };
   return (
     <article className={styles.article}>
       <figure>
@@ -34,9 +46,8 @@ function ArticleCatalogo({ nombreProducto, precioProducto, id }) {
       <div className={styles.contents}>
         <p>${precioProducto}</p>
         <div className={styles.icons}>
-          <Link to="/modificar">
-            <img src={edit} />
-          </Link>
+          <img src={edit} onClick={handleEdit} />
+
           <img src={trash} onClick={handleDelete} />
         </div>
       </div>

@@ -8,15 +8,18 @@ export const patchEntregaAsync = createAsyncThunk(
   async (payload) => {
     try {
       const { token } = payload;
-      const { data } = payload;
-      const res = await patchEntrega(data, token);
+      const { fecha } = payload;
+      const { id } = payload;
+      const newFecha = new Date(fecha);
+
+      const res = await patchEntrega(newFecha.toString(), token, id);
       if (res === 401) {
         window.alert(
           "Su sesión de usuario ha expirado, por favor inicie sesión otra vez"
         );
         window.localStorage.removeItem("userLog");
         window.location.href("/");
-        return res
+        return res;
       }
       return res;
     } catch (err) {

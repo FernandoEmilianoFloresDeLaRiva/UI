@@ -40,7 +40,7 @@ function PrivateRoutes({ auth }) {
         <CreateProduct token={token} />
       </PrivateRoute>
       <PrivateRoute pathName={"/modificar"} auth={auth}>
-        <UpdateProduct />
+        <UpdateProduct token={token}/>
       </PrivateRoute>
     </>
   );

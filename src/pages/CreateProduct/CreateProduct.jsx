@@ -10,7 +10,7 @@ import { postProductoAsync } from "../../redux/Producto/thunks/postProducto.asyn
 export default function CreateProduct({ token }) {
   const dispatch = useDispatch();
   const colors = useSelector((state) => state.colors);
-  const sizes = ["Chico", "Mediano", "Grande"];
+  const sizes = ["Pequeño", "Mediano", "Grande"];
   //atributos del producto
   const [img, setImg] = useState([]);
   const [coloresElegidos, setColoresElegidos] = useState([]);
@@ -18,7 +18,7 @@ export default function CreateProduct({ token }) {
   const [id_tamaño, setId_tamaño] = useState(null);
   const [precio, setPrecio] = useState(0);
   useEffect(() => {
-    if (id_tamaño === "Chico") setId_tamaño(1);
+    if (id_tamaño === "Pequeño") setId_tamaño(1);
     else if (id_tamaño === "Mediano") setId_tamaño(2);
     else if (id_tamaño === "Grande") setId_tamaño(3);
     else return;

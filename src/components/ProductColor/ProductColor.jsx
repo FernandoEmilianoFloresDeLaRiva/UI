@@ -8,7 +8,7 @@ export default function ProductColor({ id, token }) {
   useEffect(() => {
     const getColors = async () => {
       const res = await getColorPedido(id, token);
-      console.log(res);
+
       const { data } = res;
       setColor(data);
     };
@@ -19,7 +19,6 @@ export default function ProductColor({ id, token }) {
       <span>Colores: </span>
       <div>
         {colors.map(({ codigo_color }) => {
-          console.log(codigo_color);
           return (
             <figure
               className="productColor"

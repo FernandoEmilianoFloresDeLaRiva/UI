@@ -9,6 +9,11 @@ import {
   postProductoReducerFullfiled,
   postProductoReducerRejected,
 } from "./reducers/postProducto.reducer";
+import { patchProductoAsync } from "./thunks/patchProducto.async";
+import {
+  patchProductoReducerFullfiled,
+  pacthProductoReducerRejected,
+} from "./reducers/patchProducto.reducer";
 
 export const productoSlice = createSlice({
   name: "producto",
@@ -21,6 +26,11 @@ export const productoSlice = createSlice({
         postProductoReducerFullfiled
       );
     builder.addCase(postProductoAsync.rejected, postProductoReducerRejected);
+    builder.addCase(
+      patchProductoAsync.fulfilled,
+      patchProductoReducerFullfiled
+    );
+    builder.addCase(patchProductoAsync.rejected, pacthProductoReducerRejected);
   },
 });
 

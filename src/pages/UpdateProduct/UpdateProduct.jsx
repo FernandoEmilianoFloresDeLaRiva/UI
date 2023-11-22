@@ -5,12 +5,12 @@ import Card from "../../components/Card/Card";
 import Select from "../../components/Select/Select";
 import InputImage from "../../components/InputImage/InputImage";
 import { useSelector, useDispatch } from "react-redux";
-import { postProductoAsync } from "../../redux/Producto/thunks/postProducto.async";
+import { patchProductoAsync } from "../../redux/Producto/thunks/patchProducto.async";
 
 export default function UpdateProduct({ token }) {
   const dispatch = useDispatch();
   const colors = useSelector((state) => state.colors);
-  const sizes = ["Chico", "Mediano", "Grande"];
+  const producto = useSelector((state) => state.producto);
   //atributos del producto, inicializarlos con objeto que esta dentro del contexto
   const [img, setImg] = useState([]);
   const [coloresElegidos, setColoresElegidos] = useState([]);
@@ -18,7 +18,14 @@ export default function UpdateProduct({ token }) {
   const [id_tamaño, setId_tamaño] = useState(null);
   const [precio, setPrecio] = useState(0);
   useEffect(() => {
-    if (id_tamaño === "Chico") setId_tamaño(1);
+    setNombre(producto.nombre_producto);
+    setId_tamaño(producto.nombre_tamaño);
+    setPrecio(producto.precio);
+  }, [producto]);
+  const sizes = ["Pequeño", "Mediano", "Grande"];
+
+  useEffect(() => {
+    if (id_tamaño === "Pequeño") setId_tamaño(1);
     else if (id_tamaño === "Mediano") setId_tamaño(2);
     else if (id_tamaño === "Grande") setId_tamaño(3);
     else return;
@@ -27,16 +34,19 @@ export default function UpdateProduct({ token }) {
     e.preventDefault();
     const objetoData = {
       token,
+      id: producto.id_producto,
+      coloresELiminar: producto.dataColores,
       data: {
         nombre_producto: nombre,
         precio,
         id_tamaño,
         tipo_producto: 1,
-        colores: coloresElegidos,
-        imagenes: img,
+        colores:
+          coloresElegidos.length === 0 ? producto.dataColores : coloresElegidos,
+        imagenes: img.length !== 0 ? img : producto.img,
       },
     };
-    dispatch(postProductoAsync(objetoData));
+    dispatch(patchProductoAsync(objetoData));
   };
   return (
     <Card>
@@ -62,6 +72,7 @@ export default function UpdateProduct({ token }) {
           />
 
           <input
+            value={precio}
             placeholder="Precio"
             className="inputText"
             id="precio"

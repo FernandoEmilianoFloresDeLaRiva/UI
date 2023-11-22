@@ -60,16 +60,14 @@ export default function Calendar () {
     for(let i=0; i < rest; i++ ){
         days.push(0)
     } 
-    console.log(nRows)
-    console.log(rest)
-    console.log(days)
+
 
     for(let i=0; i< nRows; i++){
         let arrayAux = days.splice(0,7) 
         auxDays.push(arrayAux)
     }
     
-    console.log(auxDays)
+  
 
     useEffect(()=>{
         setMonth(months[index])
@@ -123,7 +121,7 @@ export default function Calendar () {
                                                 let dayOrders = []
                                                 if(day !== 0){
                                                     dayOrders = selectOrders(day)
-                                                    console.log(dayOrders)
+                                              
                                                 }
                                                 return <CallendarCell day={day} month={index} year={2023} dayOrders={dayOrders} setSuccess={setSuccess}/>
                                             })

@@ -1,18 +1,23 @@
 import { apiPatch } from "../../api/api";
-import { ENTREGAS_URL } from "../../../constants/entregas_URL";
+import { PRODUCTOS_BASE } from "../../../constants/productos_URL";
 
-export const patchEntrega = async (data, token, id) => {
+export const patchProducto = async (data, token, id) => {
   try {
     const headers = {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     };
-    const body = {
+
+    const objetoData = {
       method: "PATCH",
       headers,
       body: JSON.stringify(data),
     };
-    const res = await apiPatch(`${ENTREGAS_URL}/parcialUpdate/${id}`, body);
+
+    const res = await apiPatch(
+      `${PRODUCTOS_BASE}/parcialUpdate/${id}`,
+      objetoData
+    );
     return res;
   } catch (err) {
     console.error("Error fetching: ", err);

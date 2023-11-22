@@ -26,7 +26,6 @@ export default function InputImage({ setImg }) {
             type="file"
             id="image"
             name="image"
-            required
             accept="image/*"
             onChange={previewImage}
             multiple

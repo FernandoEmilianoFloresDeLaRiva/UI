@@ -14,7 +14,7 @@ export default function NavHeader() {
     display === "inline-block"
       ? (myRef.current.style.display = "none")
       : (myRef.current.style.display = "inline-block");
-    console.log(display);
+
   };
   const handleLogOut = () => {
     dispatch(logout());

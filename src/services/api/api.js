@@ -45,6 +45,12 @@ export const apiPatch = async (endpoint, data) => {
   return res.json();
 };
 
+export const apiPut = async (endpoint, data) => {
+  const res = await fetch(endpoint, data);
+  if (res.status !== 200) return res.status;
+  return res.json();
+};
+
 export const apiDelete = async (endpoint, data) => {
   const res = await fetch(endpoint, data);
   if (res.status !== 200) return res.status;
