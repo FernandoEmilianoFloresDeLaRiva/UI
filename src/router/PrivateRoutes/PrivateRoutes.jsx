@@ -7,7 +7,6 @@ import ClientService from "../../pages/ClientService/ClientService";
 import Calendar from "../../pages/Calendar/Calendar";
 import ProductInfo from "../../pages/ProductInfo/ProductInfo";
 import NavHeader from "../../components/NavHeader/NavHeader.jsx";
-import Bell from "../../components/BellNotification/Bell.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { inicializarSocket } from "../../utilities/inicializarSocket.js";
 import Personalizado from "../../pages/ProductoPeronalizado/Personalizado.jsx";

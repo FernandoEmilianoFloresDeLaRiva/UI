@@ -13,7 +13,7 @@ export default function InputImage({ setImg }) {
       setImages((prev) => [...prev, URL.createObjectURL(target.files[0])]);
       setExisting(true);
       const b64 = await toBase64(target);
-      setImg((prev) => [...prev, {b64, extension : "jpg"}]);
+      setImg((prev) => [...prev, { b64, extension: "jpg" }]);
     } catch (err) {
       console.error("error subiendo la imagen, intente de nuevo");
       window.alert("error subiendo la imagen, intente de nuevo");
@@ -39,7 +39,7 @@ export default function InputImage({ setImg }) {
           </label>
         </>
       ) : (
-        <ContainerImages images={images} />
+        <img src={images[0]} />
       )}
     </div>
   );

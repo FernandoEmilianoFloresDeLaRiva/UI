@@ -11,7 +11,7 @@ export const postUserReducerFullfiled = (state, action) => {
 };
 
 export const postUserReducerReject = (state, action) => {
-  console.log(action);
+
   window.alert("Error creando el usuario");
   return state;
 };

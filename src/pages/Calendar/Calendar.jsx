@@ -31,14 +31,6 @@ export default function Calendar() {
   const days = [];
   const auxDays = [];
 
-  // const orders = [
-  //   { day: 3, order: 45346, hour: "12-1 PM" },
-  //   { day: 3, order: 48266, hour: "1-2 PM" },
-  //   { day: 8, order: 56749, hour: "2-3 PM" },
-  //   { day: 14, order: 75864, hour: "5-6 PM" },
-  //   { day: 22, order: 25435, hour: "10-11AM" },
-  // ];
-
   const selectOrders = (day) => {
     const dayOrders = orders.filter((order) => order.day === day);
     return dayOrders;
@@ -115,7 +107,7 @@ export default function Calendar() {
                   let dayOrders = [];
                   if (day !== 0) {
                     dayOrders = selectOrders(day);
-                    console.log(dayOrders);
+                   
                   }
                   return (
                     <CallendarCell

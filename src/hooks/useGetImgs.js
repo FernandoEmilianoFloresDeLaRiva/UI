@@ -13,6 +13,11 @@ export const useGetImgs = (token, id_producto, ref) => {
       try {
         //el indice se manda
         const img = await getImgs(id_producto, token);
+        if (!img) {
+          ref.current.src =
+            "https://www.suzukijember.com/gallery/gambar_product/default.jpg";
+          return;
+        }
         if (img === 401) {
           dispatch(logout());
           window.alert(

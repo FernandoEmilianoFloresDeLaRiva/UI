@@ -13,6 +13,6 @@ export const getColorPedido = async (id, token) => {
     return res;
   } catch (err) {
     console.error("Error fetching: ", err);
-    throw err;
+
   }
 };

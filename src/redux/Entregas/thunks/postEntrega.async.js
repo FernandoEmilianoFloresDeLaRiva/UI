@@ -11,15 +11,15 @@ export const postEntregaAsync = createAsyncThunk(
       const { token } = payload;
       const { data } = payload;
       const res = await postEntregas(data, token);
-      if (res === 401) {
-        window.alert(
-          "Su sesión de usuario ha expirado, por favor inicie sesión otra vez"
-        );
-        window.localStorage.removeItem("userLog");
-        window.location.href("/");
-        return res
-      }
-      socket.emit("nueva entrega", "Un cliente ha emitido una entrega")
+      // if (res === 401) {
+      //   window.alert(
+      //     "Su sesión de usuario ha expirado, por favor inicie sesión otra vez"
+      //   );
+      //   window.localStorage.removeItem("userLog");
+      //   window.location.href("/");
+      //   return res
+      // }
+      socket.emit("nueva entrega", "Un cliente ha emitido una entrega");
       return res;
     } catch (err) {
       console.error(`Error creando entrega ` + err);
