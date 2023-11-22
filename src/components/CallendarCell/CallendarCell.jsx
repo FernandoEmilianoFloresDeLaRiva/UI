@@ -21,7 +21,7 @@ export default function CallendarCell({
     dispatch(
       patchEntregaAsync({
         token,
-        fecha: `${year}-${month + 1}-${day + 1}`,
+        fecha: `${year}-${month}-${day+1}`,
         id: order,
       })
     );

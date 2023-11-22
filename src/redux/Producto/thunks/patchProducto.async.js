@@ -17,20 +17,23 @@ export const patchProductoAsync = createAsyncThunk(
       const colores = {
         colores: coloresFiltrados,
       };
-      const resColorsDeleted = await deleteColors(id, token, colores);
+      if (!coloresELiminar.length === 0) {
+        const resColorsDeleted = await deleteColors(id, token, colores);
+      }
       data.colores.map(({ id_color }) => {
         const resAddedColor = postColor({ id_producto: id, id_color }, token);
       });
 
-      //falta agregar patch colores
+      //patch colores
 
-      // const resDeleteImg = await deleteImg(id, token);
-      //  if (resDeleteImg.message) {
-      //   const resImg = await postImg(data.imagenes, id, token);
-      //   console.log(resImg, "patchImagen");
-      // } else {
-      //   window.alert("Error sustituyendo la imagen del producto");
-      //  }
+      const resDeleteImg = await deleteImg(id, token);
+      if (resDeleteImg.message) {
+        //al momento de hacer "post" error cors
+        const resImg = await postImg(data.imagenes, id, token);
+        console.log(resImg, "patchImagen");
+      } else {
+        window.alert("Error sustituyendo la imagen del producto");
+      }
       if (res === 401) {
         window.alert(
           "Su sesión de usuario ha expirado, por favor inicie sesión otra vez"
