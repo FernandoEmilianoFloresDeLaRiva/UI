@@ -36,7 +36,9 @@ export default function InputImage({ setImg }) {
           </label>
         </>
       ) : (
-        <img src={images[0]} alt="imagen brindada" />
+        <div className="containerImages">
+          <img src={images[0]} alt="imagen brindada" className="imagePreview" />
+        </div>
       )}
     </div>
   );
