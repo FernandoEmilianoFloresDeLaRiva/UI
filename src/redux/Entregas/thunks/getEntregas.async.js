@@ -8,6 +8,7 @@ export const getEntregasAsync = createAsyncThunk(
     try {
       const res = await getEntregas(payload);
       const {data} = res;
+      console.log(data)
       return data;
     } catch (err) {
       console.error("error consiguiendo las entregas ", err);

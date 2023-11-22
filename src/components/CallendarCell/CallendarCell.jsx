@@ -38,7 +38,7 @@ export default function CallendarCell({
           }}
         >
           <span className="day">
-            {day}-{month}-{year}
+            {day}
           </span>
           {dayOrders
             .filter((orderMonth) => month === orderMonth.month)

@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React from "react";
 import "./IndexRoute.css";
 import { Route } from "wouter";
 import Login from "../../pages/Login/Login.jsx";

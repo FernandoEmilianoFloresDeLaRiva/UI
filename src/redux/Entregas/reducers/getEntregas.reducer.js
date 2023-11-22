@@ -1,5 +1,6 @@
 export const getEntregasReducerFullfiled = (state, action) => {
   const arr = action.payload;
+  console.log(arr)
   const newArr = [];
 
   arr.forEach(({ fecha, id_entrega, horario }) => {
