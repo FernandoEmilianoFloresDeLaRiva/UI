@@ -8,11 +8,10 @@ export const useProductos = () => {
     setIsLoading(true);
     const fetchProductos = () => {
       getProductos()
-        .then((res) =>{ 
-        const {data} = res;
-        setProductos(data)
-        }
-        )
+        .then((res) => {
+          const { data } = res;
+          setProductos(data);
+        })
         .then(() => setIsLoading(false))
         .catch((err) =>
           console.error("error consiguiendo los productos " + err)

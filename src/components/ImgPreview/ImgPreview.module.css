@@ -1,5 +1,6 @@
 .a{
   width: 15%;
+  display: flex;
   text-align: center;
   transition: all 1s;
   cursor: pointer;
@@ -7,6 +8,7 @@
 
 .a img {
   width: 100%;
+  object-fit: contain;
 }
 
 .a:hover {
